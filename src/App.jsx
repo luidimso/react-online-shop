@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 
 import Header from './components/Header.jsx';
 import Shop from './components/Shop.jsx';
@@ -6,10 +6,18 @@ import { DUMMY_PRODUCTS } from './dummy-products.js';
 import Product from './components/Product.jsx';
 import { CartContext } from './store/shopping-cart-context.jsx';
 
+function shoppingCartReducer(state, action) {
+  return state;
+}
+
 function App() {
   const [shoppingCart, setShoppingCart] = useState({
     items: [],
   });
+
+  const [shoppingCartState, shoppingCartDispatch] = useReducer(shoppingCartReducer, {items: []});
+
+  // These methods are passed as values as initial context value for be shared as provider, so all the components thats uses that context as provider, can use those mathods
 
   function handleAddItemToCart(id) {
     setShoppingCart((prevShoppingCart) => {
